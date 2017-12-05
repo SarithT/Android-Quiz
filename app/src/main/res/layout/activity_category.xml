@@ -16,15 +16,14 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="254dp"
         android:gravity="center"
-        android:textColor="@color/colorAccent"
         android:text="Wybierz poziom trudności"
         android:textSize="20sp"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCategories" />
 
     <TextView
         android:id="@+id/textView2"
@@ -32,17 +31,16 @@
         android:layout_height="34dp"
         android:text="Wybierz kategorie"
         android:gravity="center"
-        android:textColor="@color/colorAccent"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="138dp"
         android:layout_marginLeft="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="21dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerNumer" />
 
     <Spinner
         android:id="@+id/spinnerDifficulties"
@@ -79,7 +77,6 @@
         android:layout_width="280dp"
         android:layout_height="34dp"
         android:text="Liczba pytań"
-        android:textColor="@color/colorAccent"
         android:textSize="20sp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
@@ -97,15 +94,15 @@
         android:layout_width="124dp"
         android:layout_height="50dp"
         android:text="Start"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="385dp"
         android:layout_marginRight="118dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="118dp" />
+        android:layout_marginEnd="118dp"
+        android:layout_marginTop="23dp"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerDifficulties" />
 
     <Spinner
         android:id="@+id/spinnerNumer"
@@ -114,8 +111,11 @@
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="70dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="23dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>

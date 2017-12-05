@@ -1,6 +1,7 @@
 package com.example.david.quiz;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +22,9 @@ public class CategoryActivity extends AppCompatActivity {
     Spinner spinnerDificulty;
     Spinner spinnerNumber;
     Button buttonStart;
+    TextView textView2;
+    TextView textView3;
+    TextView textView4;
     private static final String[]numbers = {"5", "10", "15", "20"};
     private static final String[]categories = {"Historia", "Polityka", "Filmy", "Muzyka", "Matematyka"};
     private static final String[]difficulties = {"Łatwy", "Średni", "Trudny"};
@@ -45,6 +50,12 @@ public class CategoryActivity extends AppCompatActivity {
         spinnerDificulty = (Spinner)findViewById(R.id.spinnerDifficulties);
         spinnerNumber = (Spinner)findViewById(R.id.spinnerNumer);
         buttonStart = (Button)findViewById(R.id.buttonStart);
+        textView2 = (TextView)findViewById(R.id.textView2);
+        textView3 = (TextView)findViewById(R.id.textView3);
+        textView4 = (TextView)findViewById(R.id.textView4);
+        textView2.setTextColor(Color.WHITE);
+        textView3.setTextColor(Color.WHITE);
+        textView4.setTextColor(Color.WHITE);
         ArrayAdapter<String> adapterNumbers = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  numbers);
         ArrayAdapter<String> adapterCategories = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  categories);
         ArrayAdapter<String> adapterDifficulties = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,  difficulties);

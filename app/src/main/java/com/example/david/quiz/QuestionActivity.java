@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     Button buttonAnswer2;
     Button buttonAnswer3;
     Button buttonAnswer4;
+    ProgressBar progressBar;
+    private int progressStatus = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,17 +50,31 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             Log.e("DEBUG", "Exception: " + e.toString());
         }
         textViewQuestion = (TextView)findViewById(R.id.textViewQuestion);
+        textViewQuestion.setTextColor(Color.WHITE);
         buttonAnswer1 = (Button)findViewById(R.id.buttonAnswerOne);
         buttonAnswer2 = (Button)findViewById(R.id.buttonAnswerTwo);
         buttonAnswer3 = (Button)findViewById(R.id.buttonAnswerThree);
         buttonAnswer4 = (Button)findViewById(R.id.buttonAnswerFour);
+        progressBar = (ProgressBar)findViewById(R.id.progressBar);
+        progressBar.setMinimumHeight(20);
+        progressBar.getProgressDrawable().setColorFilter(Color.GREEN, android.graphics.PorterDuff.Mode.SRC_IN);
+        buttonAnswer1.setTextColor(Color.WHITE);
+        buttonAnswer2.setTextColor(Color.WHITE);
+        buttonAnswer3.setTextColor(Color.WHITE);
+        buttonAnswer4.setTextColor(Color.WHITE);
         buttonAnswer1.setOnClickListener(this);
         buttonAnswer2.setOnClickListener(this);
         buttonAnswer3.setOnClickListener(this);
         buttonAnswer4.setOnClickListener(this);
         questionId = 0;
         score = 0;
-        setNewQuestionView(questionId);
+        setUpUI();
+        try{
+            setNewQuestionView(questionId);
+        } catch (Exception e){
+            Toast.makeText(QuestionActivity.this,"Combination not available",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void setNewQuestionView(int id){
@@ -95,14 +112,28 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         }
         if (questionList.size() == questionId+1)
         {
+            Result result = new Result(questionList.get(0).getCategory(),
+                    questionList.get(0).getDifficulty(),
+                    questionList.size(),
+                    score);
+            DatabaseHelper db = new DatabaseHelper(this);
+            db.addResult(result);
             Intent mainActivity = new Intent(QuestionActivity.this, MainActivity.class);
             mainActivity.putExtra("score", Integer.toString(score));
+            mainActivity.putExtra("number", Integer.toString(questionList.size()));
             startActivity(mainActivity);
         } else {
             questionId++;
             setNewQuestionView(questionId);
+            progressStatus += 100/questionList.size();
+            progressBar.setProgress(progressStatus);
         }
     }
+
+    public void setUpUI () {
+
+    }
+
 
     private class GetQuestions extends AsyncTask<Void, Void, Void> {
         @Override
@@ -125,7 +156,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     // Getting JSON Array node
                     JSONArray questions = jsonObj.getJSONArray("results");
 
-                    // looping through All Contacts
+                    // looping through All Questions
                     for (int i = 0; i < questions.length(); i++) {
                         JSONObject c = questions.getJSONObject(i);
                         String category = c.getString("category");
